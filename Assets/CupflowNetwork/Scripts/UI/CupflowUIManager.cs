@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CupflowNetwork
@@ -8,7 +6,12 @@ namespace CupflowNetwork
     {
         public static CupflowUIManager Instance { get; private set; }
 
+        [SerializeField] private Transform windowContainer;
+
         [SerializeField] private GameObject modalWindow;
+
+        [Header("Icons")]
+        [SerializeField] private CupflowIconSet icons;
 
         private void Awake()
         {
@@ -18,9 +21,14 @@ namespace CupflowNetwork
 
         public ModalWindow Modal()
         {
-            ModalWindow modal = Instantiate(modalWindow, transform).GetComponent<ModalWindow>();
+            ModalWindow modal = Instantiate(modalWindow, windowContainer).GetComponent<ModalWindow>();
             modal.gameObject.SetActive(false);
             return modal;
+        }
+
+        public CupflowIconSet GetIcons()
+        {
+            return icons;   
         }
     }
 }

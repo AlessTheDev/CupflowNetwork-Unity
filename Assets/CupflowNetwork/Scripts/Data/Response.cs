@@ -17,7 +17,7 @@ namespace CupflowNetwork
     [System.Serializable]
     public class ResponseBody
     {
-        public string Status { get; set; }
+        public MessageStatus Status { get; set; }
         public string Data { get; set; }
         public string Error { get; set; }
     }
@@ -26,6 +26,11 @@ namespace CupflowNetwork
     {
         REQUEST,
         RESPONSE
+    }
+    public enum MessageStatus
+    {
+        SUCCESS,
+        ERROR
     }
 
 }

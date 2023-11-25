@@ -16,6 +16,7 @@ namespace CupflowNetwork
 
         [Header("Prefabs")]
         [SerializeField] private ModalButton modalButton;
+        [SerializeField] private Transform buttonsRow;
 
         public void Show(Sprite icon, string title = null, string description = null, ButtonInfo[] buttons = null)
         {
@@ -42,11 +43,16 @@ namespace CupflowNetwork
             if(buttons != null)
             {
                 buttonsContainer.gameObject.SetActive(true);
+                Transform currentRow = Instantiate(buttonsRow, buttonsContainer);
                 foreach (ButtonInfo info in buttons)
                 {
-                    ModalButton button = Instantiate(modalButton, buttonsContainer).GetComponent<ModalButton>();
+                    ModalButton button = Instantiate(modalButton, currentRow).GetComponent<ModalButton>();
                     button.AssignModal(this); 
                     button.Init(info);
+                    if(currentRow.childCount >= 2)
+                    {
+                        currentRow = Instantiate(buttonsRow, buttonsContainer);
+                    }
                 }
             }
             gameObject.SetActive(true);

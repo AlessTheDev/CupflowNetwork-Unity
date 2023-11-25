@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -34,17 +35,18 @@ namespace CupflowNetwork
         private ModalWindow modal;
 
         public void Init(ButtonInfo buttonInfo)
-        { 
+        {
             switch (buttonInfo.ButtonType)
             {
                 case ButtonType.Primary:
-                    buttonBackground.color = new Color(240, 235, 216);
+                    buttonBackground.color = new Color32(240, 235, 216, 255);
                     break;
                 case ButtonType.Secondary:
-                    buttonBackground.color = new Color(20, 21, 26);
+                    buttonBackground.color = new Color32(20, 21, 26, 255);
+                    text.color = Color.white; 
                     break;
                 case ButtonType.Danger:
-                    buttonBackground.color = new Color(245, 115, 115);
+                    buttonBackground.color = new Color32(245, 115, 115, 255);
                     break;
 
             }

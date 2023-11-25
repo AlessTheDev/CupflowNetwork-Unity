@@ -7,21 +7,18 @@ public class Tester : MonoBehaviour
     private void Start()
     {
         WebsocketManager.Instance.OnWebsocketConnected += OnConnection;
-
-        CupflowUIManager.Instance
-            .Modal()
-            .Show(
-                icon: cupflowLogo,
-                title: "Modal Title",
-                description: "Modal Description",
-                buttons: new ButtonInfo[] {
-                    new ButtonInfo(ButtonType.Primary, "OK", (ModalWindow modal) => modal.Close())
-                }
-            );
+        //WebsocketManager.Instance.OnWebsocketResponse += OnResponse;
     }
 
-private void OnConnection()
-{
-    Debug.Log($"[CUPFLOW NETWORK DEBUG]\nWebsocket Connected");
-}
+    private void OnResponse(Response res)
+    {
+        Debug.Log($"[CUPFLOW NETWORK DEBUG]\nResponse data: {res.Body.Data}");
+    }
+
+    private void OnConnection()
+    {
+        //Debug.Log($"[CUPFLOW NETWORK DEBUG]\nWebsocket Connected");
+
+        
+    }
 }
