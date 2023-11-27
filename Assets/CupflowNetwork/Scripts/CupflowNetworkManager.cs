@@ -4,8 +4,14 @@ namespace CupflowNetwork
 {
     public class CupflowNetworkManager : MonoBehaviour
     {
+        [SerializeField] private GameInfo gameInfo;
         private void Start()
         {
+            if (gameInfo == null)
+            {
+                Debug.LogError("Game info can't be null");
+            }
+
             try
             {
                 int port = Utils.GetActivePort();
@@ -43,6 +49,17 @@ namespace CupflowNetwork
         private void OnWebsocketConnected()
         {
             Debug.Log($"[CUPFLOW NETWORK] Websocket Connected");
+
+            AddGame();
+        }
+
+        private void AddGame()
+        {
+            new AddGameRequest(
+                OnResponse: (_) => { },
+                OnError: (_) => { },
+                new AddGameRequestParams(gameInfo.GameId, gameInfo.GameSecret)
+            ).SendRequest();
         }
     }
 

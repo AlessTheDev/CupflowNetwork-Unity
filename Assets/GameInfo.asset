@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b517ee692eca147b58e93a060c1523, type: 3}
+  m_Name: GameInfo
+  m_EditorClassIdentifier: 
+  GameId: 5608056f-2dac-4081-a1d8-b712bd222026
+  GameSecret: '{A1:H[V2_+SS}J}2ux-xnEmayA8A-(<5''&@4+bR#|}d%3FIo:?A<2UpO}r4boNg'
