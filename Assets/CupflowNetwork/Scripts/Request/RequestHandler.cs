@@ -48,9 +48,9 @@ namespace CupflowNetwork
                         T data = JsonConvert.DeserializeObject<T>(res.Body.Data);
                         OnResponse.Invoke(data);
                     }
-                    catch
+                    catch(System.Exception e)
                     {
-                        OnError.Invoke("Invalid Data");
+                        OnError.Invoke("Invalid Data: " + e.Message);
                     }
                 }
 

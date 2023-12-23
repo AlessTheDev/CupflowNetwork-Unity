@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace CupflowNetwork
@@ -5,8 +6,21 @@ namespace CupflowNetwork
     public class CupflowNetworkManager : MonoBehaviour
     {
         [SerializeField] private GameInfo gameInfo;
+
+        public static CupflowNetworkManager Instance { get; private set; }
+
+        private Achievement[] gameAchievements = null;
+
         private void Start()
         {
+            if (Instance != null)
+            {
+                Debug.LogError("There are 2 instances of the Cupflow Network Manager");
+                return;
+            }
+
+            Instance = this;
+
             if (gameInfo == null)
             {
                 Debug.LogError("Game info can't be null");
@@ -51,6 +65,7 @@ namespace CupflowNetwork
             Debug.Log($"[CUPFLOW NETWORK] Websocket Connected");
 
             AddGame();
+            FetchAchievements();
         }
 
         private void AddGame()
@@ -60,6 +75,31 @@ namespace CupflowNetwork
                 OnError: (_) => { },
                 new AddGameRequestParams(gameInfo.GameId, gameInfo.GameSecret)
             ).SendRequest();
+        }
+
+        private async void FetchAchievements()
+        {
+            System.Diagnostics.Stopwatch s = System.Diagnostics.Stopwatch.StartNew();
+            await Task.Run(() =>
+            {
+                s.Start();
+                new GetGameAchievementsRequest(
+                OnResponse: (data) =>
+                {
+                    gameAchievements = data;
+                    s.Stop();
+                },
+                OnError: (e) => { Debug.LogError($"[CUPFLOW NETWORK] Error while getting Game Achievements: {e}"); },
+                new GetGameAchievementsParams(gameInfo.GameId)
+                ).SendRequest();
+            });
+
+            Debug.Log($"The operation took: {s.ElapsedMilliseconds}");
+        }
+
+        public Achievement[] GetGameAchievements()
+        {
+            return gameAchievements;
         }
     }
 
