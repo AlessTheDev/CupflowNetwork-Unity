@@ -14,7 +14,7 @@ namespace CupflowNetwork
         {
             achievementName.text = achievement.name;
             achievementDescription.text = achievement.description;
-            Utils.AssignUrlToImage(achievementImage, achievement.image);
+            StartCoroutine(Utils.AssignUrlToImage(achievementImage, achievement.image));
         }
     }
 }

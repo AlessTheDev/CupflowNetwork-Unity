@@ -9,6 +9,13 @@ namespace CupflowNetwork
 {
     public class Utils
     {
+        /// <summary>
+        /// Reads the port.txt file in appdata
+        /// </summary>
+        /// <returns>
+        /// the port
+        /// </returns>
+        /// <exception cref="CupflowNetworkNotOpenException">The port.txt file hasn't been found</exception>
         public static int GetActivePort()
         {
             try
@@ -23,6 +30,12 @@ namespace CupflowNetwork
             }
         }
 
+        /// <summary>
+        /// Gets the image from an URL and then assigns it to the Image sprite
+        /// </summary>
+        /// <param name="image">The Image component</param>
+        /// <param name="mediaUrl">The image URL</param>
+        /// <returns></returns>
         public static IEnumerator AssignUrlToImage(Image image, string mediaUrl)
         {
             UnityWebRequest request = UnityWebRequestTexture.GetTexture(mediaUrl);
