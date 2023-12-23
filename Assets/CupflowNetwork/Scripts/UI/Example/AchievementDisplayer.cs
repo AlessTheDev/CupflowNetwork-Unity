@@ -16,6 +16,20 @@ namespace CupflowNetwork
             achievementDescription.text = achievement.description;
             StartCoroutine(Utils.AssignUrlToImage(achievementImage, achievement.image));
         }
+
+        public void SetIsObtained(bool isObtained)
+        {
+            if (isObtained)
+            {
+                achievementName.color = Color.white;
+            }
+            else
+            {
+                Color color = Color.gray;
+                color.a = 0.7f;
+                achievementImage.color = color;
+            }
+        }
     }
 }
 
